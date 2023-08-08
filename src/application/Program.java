@@ -1,43 +1,41 @@
 package application;
 
-import java.util.Locale;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
-import model.entities.Account;
-import model.exceptions.DomainException;
+import entities.Aluno;
 
 public class Program {
 
 	public static void main(String[] args) {
-		Locale.setDefault(Locale.US);
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner (System.in);
 		try {
-		System.out.println("Enter account data");
-		System.out.print("Number:");
-		int numero = sc.nextInt();
-		sc.nextLine();
-		System.out.print("Holder:");
-		String nome = sc.nextLine();
-		System.out.print("Initial balance:");
-		Double initialBalance = sc.nextDouble();
-		System.out.print("Withdraw limit:");
-		Double withdrawLimit = sc.nextDouble();
-		
-		Account conta = new Account(numero,nome,initialBalance,withdrawLimit);
-		
-		System.out.println("");
-		System.out.print("Enter amount for withdraw:");
-		Double withdraw = sc.nextDouble();
-		
-		conta.withdraw(withdraw);
-		System.out.println("New balance: " + conta.getBalance());
-		}
-		catch (DomainException e) {
-			System.out.println("Withdraw error: " + e.getMessage());
-		}
-		catch (RuntimeException e) {
-			System.out.println("Unexpected error");
+			Set<Aluno> set = new HashSet<>();
+			System.out.print("How many students for course A?");
+			int a = sc.nextInt();
+			for (int i = 0; i < a; i++) {
+				Long id = sc.nextLong();
+				set.add(new Aluno(id));
+			}
+			System.out.print("How many students for course B?");
+			int b = sc.nextInt();
+			for (int i = 0; i < b; i++) {
+				Long id = sc.nextLong();
+				set.add(new Aluno(id));
+			}
+			System.out.print("How many students for course C?");
+			int c = sc.nextInt();
+			for (int i = 0; i < c; i++) {
+				Long id = sc.nextLong();
+				set.add(new Aluno(id));
+			}
+			System.out.println("Total students: " + set.size());
+		} catch (RuntimeException e) {
+			System.out.println("Error: " + e.getMessage());
 		}
 		sc.close();
+
 	}
+
 }
